@@ -11,7 +11,7 @@ const Navbar = () => {
 			<ul className="navbar-links">
 				<li>
 					<Link to="/cart">
-						{/* Icon */}
+						<i className="fas fa-shopping-cart"></i>
 						Cart
 						<span className="cart_icon_badge">0</span>
 					</Link>

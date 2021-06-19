@@ -1,13 +1,18 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+// Screens
 import Home from "../src/Components/Screens/Home.jsx";
 import Product from "../src/Components/Screens/Product.jsx";
 import Cart from "../src/Components/Screens/Cart.jsx";
 
+// Components
+import Navbar from "../src/Components/Navbar.jsx";
+
 function App() {
 	return (
 		<Router>
-			{/* Navbar */}
+			<Navbar />
 			{/* SideDrawer */}
 			{/* Backdrop */}
 			<main>
@@ -17,7 +22,6 @@ function App() {
 					<Route exact path="/cart" component={Cart} />
 				</Switch>
 			</main>
-			<h1>Hello World</h1>
 		</Router>
 	);
 }
