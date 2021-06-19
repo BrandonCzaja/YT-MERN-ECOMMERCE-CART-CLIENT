@@ -5,15 +5,19 @@ const Navbar = () => {
 		<nav className="navbar">
 			{/* logo */}
 			<div className="navbar_logo">
-				<h2>MERN Shopping Cart</h2>
+				<Link to="/">
+					<h2>MERN Shopping Cart</h2>
+				</Link>
 			</div>
 			{/* links */}
-			<ul className="navbar-links">
+			<ul className="navbar_links">
 				<li>
-					<Link to="/cart">
+					<Link to="/cart" className="cart_link">
 						<i className="fas fa-shopping-cart"></i>
-						Cart
-						<span className="cart_icon_badge">0</span>
+						<span>
+							Cart
+							<span className="cart_icon_badge">0</span>
+						</span>
 					</Link>
 				</li>
 				<li>
