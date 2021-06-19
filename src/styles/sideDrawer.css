@@ -6,4 +6,10 @@
 	top: 0;
 	left: 0;
 	z-index: 200;
+	transform: translateX(-100%);
+	transition: all 0.3s ease-out;
+}
+
+.sideDrawer.show {
+	transform: translateX(0);
 }

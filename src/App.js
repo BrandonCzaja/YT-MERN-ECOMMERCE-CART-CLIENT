@@ -18,8 +18,8 @@ function App() {
 	return (
 		<Router>
 			<Navbar />
-			<SideDrawer />
-			<Backdrop />
+			<SideDrawer show={sideToggle} />
+			<Backdrop show={sideToggle} />
 			<main>
 				<Switch>
 					<Route exact path="/" component={Home} />
