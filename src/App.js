@@ -1,5 +1,8 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "../src/Components/Screens/Home.jsx";
+import Product from "../src/Components/Screens/Product.jsx";
+import Cart from "../src/Components/Screens/Cart.jsx";
 
 function App() {
 	return (
