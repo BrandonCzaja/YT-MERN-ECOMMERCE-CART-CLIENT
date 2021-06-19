@@ -8,13 +8,14 @@ import Cart from "../src/Components/Screens/Cart.jsx";
 
 // Components
 import Navbar from "../src/Components/Navbar.jsx";
+import Backdrop from "../src/Components/Backdrop.jsx";
 
 function App() {
 	return (
 		<Router>
 			<Navbar />
 			{/* SideDrawer */}
-			{/* Backdrop */}
+			<Backdrop />
 			<main>
 				<Switch>
 					<Route exact path="/" component={Home} />
