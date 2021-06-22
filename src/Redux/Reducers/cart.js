@@ -5,19 +5,25 @@ import * as actionTypes from "../Constants/cart.js";
 export const cartReducer = (state = { cartItems: [] }, action) => {
 	switch (action.type) {
 		case actionTypes.ADD_TO_CART:
-			const item = action.payload;
+			const item = action.payload; // The item we want to add to the cart
+			// Check if this item already exists in the cart (checking by product id)
 			const existItem = state.cartItems.find(
 				(x) => x.product === item.product
 			);
 
+			// If the item exists in the cart
 			if (existItem) {
 				return {
 					...state,
+					// Map the cartItems array => if the current item in the array equals the existing item that was found, set it to that item. If it is not found, set new array(from map) item to the current array item in state
+
+					// Basically this is just updating the state of the cartItems array to make sure that the action.payload is in there. If it is not (else) add the action.payload item to the cart
 					cartItems: state.cartItems.map((x) =>
 						x.product === existItem.product ? item : x
 					)
 				};
 			} else {
+				// Otherwise add the new item to the cartItems array and state
 				return {
 					...state,
 					cartItems: [...state.cartItems, item]
@@ -25,6 +31,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 			}
 			break;
 
+		// Remove the item (by id) from the array and state using filter
 		case actionTypes.REMOVE_FROM_CART:
 			return {
 				...state,

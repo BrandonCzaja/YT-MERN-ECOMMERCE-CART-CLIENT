@@ -2,8 +2,13 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
+// Reducers
+import { cartReducer } from "./Reducers/cart";
 // We will put all reducers here
-const reducer = combineReducers({});
+const reducer = combineReducers({
+	// Cart is now in the redux state dev tool in chrome
+	cart: cartReducer
+});
 
 const middleware = [thunk]; // Helps make async requests (can't be done in redux without thunk)
 
