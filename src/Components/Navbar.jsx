@@ -5,9 +5,7 @@ const Navbar = ({ click }) => {
 		<nav className="navbar">
 			{/* logo */}
 			<div className="navbar_logo">
-				<Link to="/">
-					<h2>MERN Shopping Cart</h2>
-				</Link>
+				<h2>MERN Shopping Cart</h2>
 			</div>
 			{/* links */}
 			<ul className="navbar_links">
