@@ -1,7 +1,7 @@
 import "../styles/cartItem.css";
 import { Link } from "react-router-dom";
 
-const CartItem = ({ item, quantityChangeHandler }) => {
+const CartItem = ({ item, quantityChangeHandler, removeHandler }) => {
 	return (
 		<div className="cart_item">
 			<div className="cart_item_img">
@@ -23,7 +23,9 @@ const CartItem = ({ item, quantityChangeHandler }) => {
 					))}
 				</select>
 
-				<button className="cart_item_delete_button">
+				<button
+					className="cart_item_delete_button"
+					onClick={() => removeHandler(item.product)}>
 					<i className="fas fa-trash"></i>
 				</button>
 			</div>

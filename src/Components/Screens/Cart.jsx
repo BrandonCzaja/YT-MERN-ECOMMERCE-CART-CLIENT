@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux"; // Dispatch updates cart
 import { Link } from "react-router-dom";
 
 // Actions
-import { addToCart } from "../../Redux/Actions/cart";
+import { addToCart, removeFromCart } from "../../Redux/Actions/cart";
 
 const Cart = () => {
 	const dispatch = useDispatch();
@@ -14,6 +14,11 @@ const Cart = () => {
 	// Persists changes in cart quantity
 	const quantityChangeHandler = (id, quantity) => {
 		dispatch(addToCart(id, quantity));
+	};
+
+	// Remove from Cart
+	const removeHandler = (id) => {
+		dispatch(removeFromCart(id));
 	};
 	return (
 		<div className="cart">
@@ -25,7 +30,11 @@ const Cart = () => {
 					</div>
 				) : (
 					cartItems.map((item) => (
-						<CartItem item={item} quantityChangeHandler={quantityChangeHandler} />
+						<CartItem
+							item={item}
+							quantityChangeHandler={quantityChangeHandler}
+							removeHandler={removeHandler}
+						/>
 					))
 				)}
 			</div>
