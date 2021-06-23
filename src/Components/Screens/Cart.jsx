@@ -20,6 +20,17 @@ const Cart = () => {
 	const removeHandler = (id) => {
 		dispatch(removeFromCart(id));
 	};
+
+	// Function to get the number of items in the cart
+	const getCartCount = () => {
+		return cartItems.reduce((quantity, item) => Number(item.quantity) + quantity, 0);
+	};
+
+	// Get Cart Price
+	const getCartSubTotal = () => {
+		return cartItems.reduce((price, item) => item.price * item.quantity + price, 0);
+	};
+
 	return (
 		<div className="cart">
 			<div className="cart_left">
@@ -40,8 +51,8 @@ const Cart = () => {
 			</div>
 			<div className="cart_right">
 				<div className="cart_screen_info">
-					<p>Subtotal: (0) items</p>
-					<p>$499.99</p>
+					<p>Subtotal: ({getCartCount()}) items</p>
+					<p>${getCartSubTotal().toFixed(2)}</p>
 				</div>
 				<div>
 					<button>Proceed To Checkout</button>
