@@ -25,12 +25,13 @@ const Home = () => {
 		<div className="home">
 			<h2 className="home_screen_title">Latest Products</h2>
 			<div className="home_screen_products">
-				<Product_Info />
-				<Product_Info />
-				<Product_Info />
-				<Product_Info />
-				<Product_Info />
-				<Product_Info />
+				{loading ? (
+					<h2>Loading...</h2>
+				) : error ? (
+					<h2>{error}</h2>
+				) : (
+					products.map((product) => <Product_Info />)
+				)}
 			</div>
 		</div>
 	);
