@@ -1,8 +1,12 @@
 import * as actionTypes from "../Constants/cart.js";
 // To see what the * is type: <actionTypes.> and all the constants I made will show up
 
+const CART_INITIAL_STATE = {
+	cartItems: []
+};
+
 // cartReducer takes in an initial state(which I set), and an action
-export const cartReducer = (state = { cartItems: [] }, action) => {
+export const cartReducer = (state = CART_INITIAL_STATE, action) => {
 	switch (action.type) {
 		case actionTypes.ADD_TO_CART:
 			const item = action.payload; // The item we want to add to the cart
@@ -29,7 +33,6 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 					cartItems: [...state.cartItems, item]
 				};
 			}
-			break;
 
 		// Remove the item (by id) from the array and state using filter
 		case actionTypes.REMOVE_FROM_CART:
