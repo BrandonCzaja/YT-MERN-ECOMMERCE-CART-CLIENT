@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails } from "../../Redux/Actions/product";
 import { addToCart } from "../../Redux/Actions/cart";
 
-// Match: Lets me grab the url params History:
+// Match: Lets me grab the url params History: Allows me to push items to the cart url endpoint
 const ProductScreen = ({ match, history }) => {
 	// Set quantity state to adjust the quantity field
 	const [quantity, setQuantity] = useState(1);
@@ -23,6 +23,11 @@ const ProductScreen = ({ match, history }) => {
 			dispatch(getProductDetails(match.params.id));
 		}
 	}, [dispatch, product, match]);
+
+	const addToCartHandler = () => {
+		dispatch(addToCart(product._id, quantity)); // Quantity comes from the state.
+		history.push("/cart"); // Push to url endpoint
+	};
 
 	return (
 		<div className="product_screen">
@@ -75,7 +80,11 @@ const ProductScreen = ({ match, history }) => {
 								</select>
 							</p>
 							<p>
-								<button type="button">Add to Cart</button>
+								<button
+									type="button"
+									onClick={addToCartHandler}>
+									Add to Cart
+								</button>
 							</p>
 						</div>
 					</div>
