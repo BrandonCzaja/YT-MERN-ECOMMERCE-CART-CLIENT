@@ -1,7 +1,7 @@
 import "../styles/cartItem.css";
 import { Link } from "react-router-dom";
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, quantityChangeHandler }) => {
 	return (
 		<div className="cart_item">
 			<div className="cart_item_img">
@@ -11,10 +11,11 @@ const CartItem = ({ item }) => {
 				</Link>
 
 				<p className="cart_item_price">${item.price}</p>
+				{/* quantityChangeHandler persists changes in cart quantity */}
 				<select
 					className="cart_item_select"
 					value={item.quantity}
-					onChange={() => console.log("something")}>
+					onChange={(e) => quantityChangeHandler(item.product, e.target.value)}>
 					{[...Array(item.countInStock).keys()].map((x) => (
 						<option key={x + 1} value={x + 1}>
 							{x + 1}
