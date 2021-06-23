@@ -1,47 +1,86 @@
 import "../../styles/product_screen.css";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const ProductScreen = () => {
+// Actions
+import { getProductDetails } from "../../Redux/Actions/product";
+import { addToCart } from "../../Redux/Actions/cart";
+
+// Match: Lets me grab the url params History:
+const ProductScreen = ({ match, history }) => {
+	// Set quantity state to adjust the quantity field
+	const [quantity, setQuantity] = useState(1);
+	const dispatch = useDispatch();
+
+	// Grab state of my product details
+	const productDetails = useSelector((state) => state.getProductDetails);
+	const { loading, error, product } = productDetails;
+
+	useEffect(() => {
+		// If the product is in state and the params id !== the product id in state
+		if (product && match.params.id !== product._id) {
+			// Pass the dispatch function the matched id: It will give the actual product we want
+			dispatch(getProductDetails(match.params.id));
+		}
+	}, [dispatch, product, match]);
+
 	return (
 		<div className="product_screen">
-			<div className="product_screen_left">
-				<div className="product_screen_left_img">
-					<img
-						src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80"
-						alt="product"
-					/>
+			{loading ? (
+				<h2>Loading...</h2>
+			) : error ? (
+				<h2>{error}</h2>
+			) : (
+				<>
+					<div className="product_screen_left">
+						<div className="product_screen_left_img">
+							<img src={product.imageUrl} alt={product.name} />
 
-					<div className="product_screen_left_info">
-						<p className="left_name">Product 1</p>
-						<p className="left_price">Price: $499.99</p>
-						<p className="left_description">
-							Lorem ipsum, dolor sit amet consectetur adipisicing
-							elit. Placeat, neque?
-						</p>
+							<div className="product_screen_left_info">
+								<p className="left_name">{product.name}</p>
+								<p className="left_price">{product.price}</p>
+								<p className="left_description">
+									{product.description}
+								</p>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div className="product_screen_right">
-				<div className="product_screen_right_info">
-					<p>
-						Price: <span>$499.99</span>
-					</p>
-					<p>
-						Status: <span>In Stock</span>
-					</p>
-					<p>
-						Quantity:
-						<select>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-						</select>
-					</p>
-					<p>
-						<button type="button">Add to Cart</button>
-					</p>
-				</div>
-			</div>
+					<div className="product_screen_right">
+						<div className="product_screen_right_info">
+							<p>
+								Price: <span>{product.price}</span>
+							</p>
+							<p>
+								Status:{" "}
+								<span>
+									{product.countInStock > 0
+										? "In Stock"
+										: "Out of Stock"}
+								</span>
+							</p>
+							<p>
+								Quantity:
+								<select
+									value={quantity}
+									onChange={(e) =>
+										setQuantity(e.target.value)
+									}>
+									{[
+										...Array(product.countInStock).keys()
+									].map((x) => (
+										<option value={x + 1} key={x + 1}>
+											{x + 1}
+										</option>
+									))}
+								</select>
+							</p>
+							<p>
+								<button type="button">Add to Cart</button>
+							</p>
+						</div>
+					</div>
+				</>
+			)}
 		</div>
 	);
 };
