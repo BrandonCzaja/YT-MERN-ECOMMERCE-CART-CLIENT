@@ -1,6 +1,15 @@
 import "../styles/navbar.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const Navbar = ({ click }) => {
+	const cart = useSelector((state) => state.cart);
+	const { cartItems } = cart;
+
+	const getCartCount = () => {
+		return cartItems.reduce((quantity, item) => quantity + Number(item.quantity), 0);
+	};
+
 	return (
 		<nav className="navbar">
 			{/* logo */}
