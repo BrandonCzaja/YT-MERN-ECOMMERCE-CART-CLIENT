@@ -42,6 +42,7 @@ const Cart = () => {
 				) : (
 					cartItems.map((item) => (
 						<CartItem
+							key={item.product}
 							item={item}
 							quantityChangeHandler={quantityChangeHandler}
 							removeHandler={removeHandler}
