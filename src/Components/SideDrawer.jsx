@@ -1,7 +1,15 @@
 import "../styles/sideDrawer.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const SideDrawer = ({ show, click }) => {
+	const cart = useSelector((state) => state.cart);
+	const { cartItems } = cart;
+
+	const getCartCount = () => {
+		return cartItems.reduce((quantity, item) => quantity + Number(item.quantity), 0);
+	};
+
 	// Dynamic Styling
 	const sideDrawerClass = ["sideDrawer"]; // Set the className to an array
 	if (show) {
@@ -15,7 +23,7 @@ const SideDrawer = ({ show, click }) => {
 					<Link to="/cart">
 						<i className="fas fa-shopping-cart"></i>
 						<span>
-							Cart <span className="sideDrawer_cart_icon">0</span>
+							Cart <span className="sideDrawer_cart_icon">{getCartCount()}</span>
 						</span>
 					</Link>
 				</li>
