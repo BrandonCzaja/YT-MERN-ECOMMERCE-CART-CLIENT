@@ -3,9 +3,11 @@
 import * as actionTypes from "../Constants/product";
 import axios from "axios";
 
+// getProducts fires when we go to the Home Page
 // Make a request to the backend to get all products form the database
 export const getProducts = () => async (dispatch) => {
 	try {
+		// Make the initial request to the backend
 		dispatch({ type: actionTypes.GET_PRODUCTS_REQUEST }); // Loading would be set to true
 
 		// Destructor data (which will be all products) from the request
