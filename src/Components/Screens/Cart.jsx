@@ -17,7 +17,7 @@ const Cart = () => {
 						Your cart is empty <Link to="/">Go Back</Link>
 					</div>
 				) : (
-					cartItems.map((item) => <CartItem />)
+					cartItems.map((item) => <CartItem item={item} />)
 				)}
 			</div>
 			<div className="cart_right">

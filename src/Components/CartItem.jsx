@@ -1,24 +1,25 @@
 import "../styles/cartItem.css";
 import { Link } from "react-router-dom";
 
-function CartItem() {
+const CartItem = ({ item }) => {
 	return (
 		<div className="cart_item">
 			<div className="cart_item_img">
-				<img
-					src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80"
-					alt="item image"
-				/>
-				<Link to={`/product/${11}`} className="cart_item_name">
-					<p>Product 1</p>
+				<img src={item.imageUrl} alt={item.name} />
+				<Link to={`/product/${item.product}`} className="cart_item_name">
+					<p>{item.name}</p>
 				</Link>
 
-				<p className="cart_item_price">$499.99</p>
-				<select className="cart_item_select">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
+				<p className="cart_item_price">${item.price}</p>
+				<select
+					className="cart_item_select"
+					value={item.quantity}
+					onChange={() => console.log("something")}>
+					{[...Array(item.countInStock).keys()].map((x) => (
+						<option key={x + 1} value={x + 1}>
+							{x + 1}
+						</option>
+					))}
 				</select>
 
 				<button className="cart_item_delete_button">
@@ -27,6 +28,6 @@ function CartItem() {
 			</div>
 		</div>
 	);
-}
+};
 
 export default CartItem;
