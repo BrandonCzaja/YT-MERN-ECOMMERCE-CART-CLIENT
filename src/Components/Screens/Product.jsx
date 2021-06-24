@@ -22,7 +22,7 @@ const ProductScreen = ({ match, history }) => {
 			// Pass the dispatch function the matched id: It will give the actual product we want
 			dispatch(getProductDetails(match.params.id));
 		}
-	}, [dispatch, product, match]);
+	}, [dispatch, match, product]);
 
 	const addToCartHandler = () => {
 		dispatch(addToCart(product._id, quantity)); // Quantity comes from the state.
@@ -40,39 +40,32 @@ const ProductScreen = ({ match, history }) => {
 					<div className="product_screen_left">
 						<div className="product_screen_left_img">
 							<img src={product.imageUrl} alt={product.name} />
+						</div>
 
-							<div className="product_screen_left_info">
-								<p className="left_name">{product.name}</p>
-								<p className="left_price">{product.price}</p>
-								<p className="left_description">
-									{product.description}
-								</p>
-							</div>
+						<div className="product_screen_left_info">
+							<p className="left_name">{product.name}</p>
+							<p className="left_price">{product.price}</p>
+							<p className="left_description">{product.description}</p>
 						</div>
 					</div>
+
 					<div className="product_screen_right">
 						<div className="product_screen_right_info">
 							<p>
 								Price: <span>{product.price}</span>
 							</p>
 							<p>
-								Status:{" "}
+								Status:
 								<span>
-									{product.countInStock > 0
-										? "In Stock"
-										: "Out of Stock"}
+									{product.countInStock > 0 ? "In Stock" : "Out of Stock"}
 								</span>
 							</p>
 							<p>
 								Quantity:
 								<select
 									value={quantity}
-									onChange={(e) =>
-										setQuantity(e.target.value)
-									}>
-									{[
-										...Array(product.countInStock).keys()
-									].map((x) => (
+									onChange={(e) => setQuantity(e.target.value)}>
+									{[...Array(product.countInStock).keys()].map((x) => (
 										<option value={x + 1} key={x + 1}>
 											{x + 1}
 										</option>
@@ -80,9 +73,7 @@ const ProductScreen = ({ match, history }) => {
 								</select>
 							</p>
 							<p>
-								<button
-									type="button"
-									onClick={addToCartHandler}>
+								<button type="button" onClick={addToCartHandler}>
 									Add to Cart
 								</button>
 							</p>
