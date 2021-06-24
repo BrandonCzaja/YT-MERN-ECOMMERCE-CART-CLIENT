@@ -11,8 +11,8 @@ export const getProductsReducer = (state = { products: [] }, action) => {
 
 		case actionTypes.GET_PRODUCTS_SUCCESS:
 			return {
-				loading: false,
-				products: action.payload // Comes from backend
+				products: action.payload, // comes from backend
+				loading: false
 			};
 
 		case actionTypes.GET_PRODUCTS_FAIL:
