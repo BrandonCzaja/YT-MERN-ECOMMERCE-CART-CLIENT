@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const SideDrawer = ({ show, click }) => {
+	const sideDrawerClass = ["sideDrawer"]; // Set the className to an array
+
 	const cart = useSelector((state) => state.cart);
 	const { cartItems } = cart;
 
 	const getCartCount = () => {
-		return cartItems.reduce((quantity, item) => quantity + Number(item.quantity), 0);
+		return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0);
 	};
 
-	// Dynamic Styling
-	const sideDrawerClass = ["sideDrawer"]; // Set the className to an array
 	if (show) {
 		sideDrawerClass.push("show"); // push style of "show" onto the class styling
 	}
